@@ -43,15 +43,18 @@ echo "Installing Homebrew packages"
 
 homebrew_packages=(
   "git"
-  "node"
   "mas"
+  "yarn"
   "nvm"
   "tig"
-  "yarn"
 )
 for homebrew_package in "${homebrew_packages[@]}"; do
   brew install "$homebrew_package"
 done
+
+echo "Installing Node"
+nvm install node
+nvm use node
 
 
 echo "Upgrading npm"
@@ -138,6 +141,7 @@ cp ./vscode.json ~/Library/Application\ Support/Code/User/settings.json
 # ==================================================================
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 cp ./.zshrc ~/.zshrc
+source ~/.zshrc
 
 # ==================================================================
 # MACOS
