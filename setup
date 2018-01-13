@@ -110,6 +110,8 @@ done
 # VS Code
 # ==================================================================
 
+echo "Setting up VS Code"
+
 cat << EOF >> ~/.bash_profile
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
@@ -139,6 +141,8 @@ cp ./vscode.json ~/Library/Application\ Support/Code/User/settings.json
 # ==================================================================
 # iTerm
 # ==================================================================
+echo "Setting up iTerm"
+
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 cp ./.zshrc ~/.zshrc
 source ~/.zshrc
