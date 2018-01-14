@@ -159,6 +159,10 @@ echo "Configuring screenshots to save in Downloads"
 defaults write com.apple.screencapture location ~/Downloads
 killall SystemUIServer
 
+# DS_STORE
+echo "Turning off .DS_Store on network drives"
+defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+
 # CHROME
 
 echo "Configuring incognito mode"
