@@ -1,36 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 
-
 # ==================================================================
 # ROOT
 # ==================================================================
 
 cd ~
 mkdir repos
-
-
-# ==================================================================
-# SHELL SCRIPTS
-# ==================================================================
-
-#echo "Cloning shell scripts"
-#cd ~/repos
-#git clone https://github.com/trevordmiller/shell-scripts.git
-#cd ~
-
-
-# ==================================================================
-# DOTFILES
-# ==================================================================
-
-#echo "Cloning dotfiles"
-#cd ~/repos
-#git clone https://github.com/trevordmiller/dotfiles.git
-#cd dotfiles
-#./index
-#cd ~
-
 
 # ==================================================================
 # PACKAGES
@@ -137,16 +113,34 @@ for vscode_extension in "${vscode_extensions[@]}"; do
   code --install-extension "$vscode_extension"
 done
 
-cp ./vscode.json ~/Library/Application\ Support/Code/User/settings.json
-
 # ==================================================================
 # iTerm
 # ==================================================================
-echo "Setting up iTerm"
 
+echo "Setting up oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-cp ./.zshrc ~/.zshrc
+
+
+# ==================================================================
+# DOTFILES
+# ==================================================================
+
+echo "Cloning dotfiles"
+cd ~/repos
+git clone git@github.com:fhavrlent/dotfiles.git
+cd dotfiles
+
+
+echo "VS Code dotfiles"
+rm ~/Library/Application\ Support/Code/User/settings.json
+ln ./vscode.json ~/Library/Application\ Support/Code/User/settings.json
+
+echo "zsh dotfiles"
+rm ~/.zshrc
+ln .zshrc ~/.zshrc
 source ~/.zshrc
+
+cd ~
 
 # ==================================================================
 # MACOS
@@ -177,5 +171,8 @@ defaults write com.google.chrome IncognitoModeAvailability -integer 1
 
 cat << EOF
 
-Stuff to do will go here
+- Sync iTerm 2 with com.googlecode.iterm2.plist dotfiles
+- Setup Arq Backup to B2
+  - Thin backups
+
 EOF
