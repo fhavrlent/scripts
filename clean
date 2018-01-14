@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+
+# ==================================================================
+# ARTIFACTS
+# ==================================================================
+
+echo Remove unused homebrew artifacts
+brew cleanup
+brew cask cleanup
+brew prune
+
+echo Remove .DS_Store files
+find "$HOME" -name '.DS_Store' -delete
+rm -rf "$HOME"/Downloads/*
+

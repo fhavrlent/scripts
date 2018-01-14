@@ -84,6 +84,7 @@ homebrew_cask_packages=(
   "filezilla"
   "whatsapp"
   "font-meslo-for-powerline"
+  "font-fira-code"
 )
 for homebrew_cask_package in "${homebrew_cask_packages[@]}"; do
   brew cask install "$homebrew_cask_package"
