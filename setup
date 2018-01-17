@@ -101,7 +101,7 @@ vscode_extensions=("Compulim.vscode-clock"
 "christian-kohler.path-intellisense"
 "dbaeumer.vscode-eslint"
 "dzannotti.vscode-babel-coloring"
-"emmanuelbeziat.vscode-great-icons"
+"robertohuertasm.vscode-icons"
 "esbenp.prettier-vscode"
 "felixfbecker.php-intellisense"
 "kokororin.vscode-phpfmt"
@@ -120,6 +120,15 @@ done
 echo "Setting up oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+# ==================================================================
+# DOTFILES
+# ==================================================================
+
+echo "Cloning scripts"
+cd ~/repos
+git clone git@github.com:fhavrlent/scripts.git
+
+cd ~
 
 # ==================================================================
 # DOTFILES
@@ -159,7 +168,14 @@ echo "Configuring screenshots to save in Downloads"
 defaults write com.apple.screencapture location ~/Downloads
 killall SystemUIServer
 
+# Dock
+
+echo "Hide closed apps from dock"
+defaults write com.apple.dock static-only -bool TRUE
+killall Dock
+
 # DS_STORE
+
 echo "Turning off .DS_Store on network drives"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 
