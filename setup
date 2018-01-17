@@ -36,6 +36,22 @@ nvm use node
 echo "Upgrading npm"
 npm install npm@latest -g
 
+echo "Installing npm packages"
+
+npm_packages=(
+  "create-react-native-app"
+  "eslint"
+  "eslint-plugin-prettier"
+  "react-devtools"
+  "react-native-cli"
+  "create-react-app"
+  "watchman"
+)
+
+for npm_package in "${npm_packages[@]}"; do
+  npm install -g "$npm_package"
+done
+
 
 # ==================================================================
 # APPS 
@@ -47,6 +63,8 @@ brew tap caskroom/cask
 brew tap caskroom/fonts
 
 homebrew_cask_packages=(
+  "1password"
+  "arq"
   "iterm2"
   "google-chrome"
   "firefox"
@@ -59,9 +77,11 @@ homebrew_cask_packages=(
   "postman"
   "filezilla"
   "whatsapp"
+  "rescuetime"
   "font-meslo-for-powerline"
   "font-fira-code"
 )
+
 for homebrew_cask_package in "${homebrew_cask_packages[@]}"; do
   brew cask install "$homebrew_cask_package"
 done
