@@ -4,7 +4,7 @@ set -euo pipefail
 sudo apt-get update
 sudo apt-get upgrade
 sudo add-apt-repository universe
-sudo apt install gdebi-core
+sudo apt install gdebi-core curl
 
 # ==================================================================
 # ROOT
