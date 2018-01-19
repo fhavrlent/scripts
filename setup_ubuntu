@@ -70,9 +70,9 @@ echo "Installing apps and fonts"
 
 # Enpass
 wget https://dl.sinew.in/linux/setup/5-6-5/Enpass_Installer_5.6.5
-chmod +x EnpassInstaller_5.6.5
+chmod +x Enpass_Installer_5.6.5
 sudo apt-get install libxss1 lsof
-./EnpassInstaller_5.6.5
+./Enpass_Installer_5.6.5
 
 # Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
