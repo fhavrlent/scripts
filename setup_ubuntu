@@ -151,6 +151,7 @@ done
 # ==================================================================
 
 echo "Setting up oh-my-zsh"
+sudo apt-get install zsh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # ==================================================================
@@ -174,8 +175,8 @@ cd dotfiles
 
 
 echo "VS Code dotfiles"
-rm ~/Library/Application\ Support/Code/User/settings.json
-ln ./vscode.json ~/Library/Application\ Support/Code/User/settings.json
+rm ~/.config/Code/User/settings.json
+ln ./vscode.json ~/.config/Code/User/settings.json
 
 echo "zsh dotfiles"
 rm ~/.zshrc
