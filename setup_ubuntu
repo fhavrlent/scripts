@@ -69,10 +69,10 @@ done
 echo "Installing apps and fonts"
 
 # Enpass
-echo "deb http://repo.sinew.in/ stable main" > \/etc/apt/sources.list.d/enpass.list
-wget -O - https://dl.sinew.in/keys/enpass-linux.key | apt-key add -
-apt-get update
-apt-get install enpass
+wget https://dl.sinew.in/linux/setup/5-6-5/Enpass_Installer_5.6.5
+chmod +x EnpassInstaller_5.6.5
+sudo apt-get install libxss1 lsof
+./EnpassInstaller_5.6.5
 
 # Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
