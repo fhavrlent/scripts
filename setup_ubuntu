@@ -1,0 +1,193 @@
+#!/bin/bash
+set -euo pipefail
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo add-apt-repository universe
+sudo apt install gdebi-core
+
+# ==================================================================
+# ROOT
+# ==================================================================
+
+cd ~
+mkdir repos
+
+# ==================================================================
+# PACKAGES
+# ==================================================================
+
+sudo apt-get update
+
+# Git
+echo "Installing git"
+sudo apt-get install git
+
+# Nvm
+echo "Installing Nvm"
+sudo apt-get install build-essential libssl-dev
+curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh -o install_nvm.sh
+bash install_nvm.sh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Tig
+echo "Installing Tig"
+sudo apt-get install tig
+
+# Yarn
+echo "Installing Yarn"
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update && sudo apt-get install yarn
+
+echo "Installing Node"
+nvm install node
+
+echo "Upgrading npm"
+npm install npm@latest -g
+
+echo "Installing npm packages"
+
+npm_packages=(
+  "eslint"
+  "eslint-plugin-prettier"
+  "create-react-app"
+  "watchman"
+)
+
+for npm_package in "${npm_packages[@]}"; do
+  echo "Installing ${npm_package}"
+  npm install -g "$npm_package"
+done
+
+# ==================================================================
+# APPS 
+# ==================================================================
+
+echo "Installing apps and fonts"
+
+# Enpass
+echo "deb http://repo.sinew.in/ stable main" > \/etc/apt/sources.list.d/enpass.list
+wget -O - https://dl.sinew.in/keys/enpass-linux.key | apt-key add -
+apt-get update
+apt-get install enpass
+
+# Chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo gdebi google-chrome-stable_current_amd64.deb --n
+rm google-chrome-stable_current_amd64.deb
+
+# Slack 
+wget https://downloads.slack-edge.com/linux_releases/slack-desktop-3.0.5-amd64.deb
+sudo gdebi slack-desktop-3.0.5-amd64.deb
+rm slack-desktop-3.0.5-amd64.deb
+
+
+# VS Code
+wget https://az764295.vo.msecnd.net/stable/490ef761b76b3f3b3832eff7a588aac891e5fe80/code_1.19.2-1515599945_amd64.deb
+sudo gdebi code_1.19.2-1515599945_amd64.deb --n
+rm code_1.19.2-1515599945_amd64.deb
+
+# FileZilla
+sudo apt-get install filezilla
+
+# Rescue Time
+wget https://www.rescuetime.com/installers/rescuetime_current_amd64.deb
+sudo gdebi rescuetime_current_amd64.deb --n
+rm rescuetime_current_amd64.deb
+
+# Fira Code Font
+mkdir -p ~/.local/share/fonts
+for type in Bold Light Medium Regular Retina; do
+    wget -O ~/.local/share/fonts/FiraCode-${type}.ttf \
+    "https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-${type}.ttf?raw=true";
+done
+fc-cache -f
+
+# Telegram
+#sudo apt-get install telegram-desktop
+
+# Wire
+sudo apt-get install apt-transport-https
+wget -q https://wire-app.wire.com/linux/releases.key -O- | sudo apt-key add -
+echo "deb https://wire-app.wire.com/linux/debian stable main" | sudo tee /etc/apt/sources.list.d/wire-desktop.list
+sudo apt-get update
+sudo apt-get install wire-desktop
+
+# ==================================================================
+# VS Code
+# ==================================================================
+
+echo "Setting up VS Code"
+
+cat << EOF >> ~/.bash_profile
+# Add Visual Studio Code (code)
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+EOF
+
+vscode_extensions=("Compulim.vscode-clock"
+"EditorConfig.EditorConfig"
+"burkeholland.simple-react-snippets"
+"capaj.vscode-exports-autocomplete"
+"christian-kohler.path-intellisense"
+"dbaeumer.vscode-eslint"
+"dzannotti.vscode-babel-coloring"
+"robertohuertasm.vscode-icons"
+"esbenp.prettier-vscode"
+"felixfbecker.php-intellisense"
+"kokororin.vscode-phpfmt"
+"naumovs.color-highlight"
+"robinbentley.sass-indented"
+"xabikos.JavaScriptSnippets")
+
+for vscode_extension in "${vscode_extensions[@]}"; do
+  code --install-extension "$vscode_extension"
+done
+
+# ==================================================================
+# iTerm
+# ==================================================================
+
+echo "Setting up oh-my-zsh"
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+# ==================================================================
+# DOTFILES
+# ==================================================================
+
+echo "Cloning scripts"
+cd ~/repos
+git clone git@github.com:fhavrlent/scripts.git
+
+cd ~
+
+# ==================================================================
+# DOTFILES
+# ==================================================================
+
+echo "Cloning dotfiles"
+cd ~/repos
+git clone git@github.com:fhavrlent/dotfiles.git
+cd dotfiles
+
+
+echo "VS Code dotfiles"
+rm ~/Library/Application\ Support/Code/User/settings.json
+ln ./vscode.json ~/Library/Application\ Support/Code/User/settings.json
+
+echo "zsh dotfiles"
+rm ~/.zshrc
+ln .zshrc ~/.zshrc
+source ~/.zshrc
+
+cd ~
+
+# ==================================================================
+# Ubuntu
+# ==================================================================
+
+# Enable ‘Minimise on Click’
+gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
+
