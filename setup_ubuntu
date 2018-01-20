@@ -147,6 +147,14 @@ for vscode_extension in "${vscode_extensions[@]}"; do
 done
 
 # ==================================================================
+# zsh
+# ==================================================================
+
+echo "Setting zsh"
+sudo apt-get install zsh
+git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+
+# ==================================================================
 # DOTFILES
 # ==================================================================
 
@@ -186,9 +194,6 @@ gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshel
 
 
 # ==================================================================
-# zsh
+# Enable zsh
 # ==================================================================
-
-echo "Setting zsh"
-sudo apt-get install zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+chsh -s /bin/zsh
