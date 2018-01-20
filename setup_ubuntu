@@ -147,14 +147,6 @@ for vscode_extension in "${vscode_extensions[@]}"; do
 done
 
 # ==================================================================
-# iTerm
-# ==================================================================
-
-echo "Setting up oh-my-zsh"
-sudo apt-get install zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-# ==================================================================
 # DOTFILES
 # ==================================================================
 
@@ -192,3 +184,11 @@ cd ~
 # Enable ‘Minimise on Click’
 gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
 
+
+# ==================================================================
+# zsh
+# ==================================================================
+
+echo "Setting zsh"
+sudo apt-get install zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"

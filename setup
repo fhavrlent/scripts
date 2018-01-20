@@ -23,6 +23,8 @@ homebrew_packages=(
   "yarn"
   "nvm"
   "tig"
+  "zsh" 
+  "zsh-completions"
 )
 for homebrew_package in "${homebrew_packages[@]}"; do
   brew install "$homebrew_package"
@@ -133,12 +135,6 @@ for vscode_extension in "${vscode_extensions[@]}"; do
   code --install-extension "$vscode_extension"
 done
 
-# ==================================================================
-# iTerm
-# ==================================================================
-
-echo "Setting up oh-my-zsh"
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # ==================================================================
 # DOTFILES
@@ -237,3 +233,10 @@ cat << EOF
   - Thin backups
 
 EOF
+
+# ==================================================================
+# zsh
+# ==================================================================
+
+echo "Setting up oh-my-zsh"
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
