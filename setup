@@ -6,7 +6,7 @@ set -euo pipefail
 # ==================================================================
 
 cd ~
-mkdir repos
+mkdir -p repos
 
 # ==================================================================
 # PACKAGES
@@ -29,11 +29,6 @@ homebrew_packages=(
 for homebrew_package in "${homebrew_packages[@]}"; do
   brew install "$homebrew_package"
 done
-
-echo "Installing Node"
-nvm install node
-nvm use node
-
 
 echo "Upgrading npm"
 npm install npm@latest -g
@@ -79,6 +74,8 @@ homebrew_cask_packages=(
   "filezilla"
   "whatsapp"
   "rescuetime"
+  "scroll-reverser"
+  "gpg-suite"
   "font-meslo-for-powerline"
   "font-fira-code"
 )
@@ -95,11 +92,11 @@ mac_app_store_apps=(
   "715768417" # MS Remote Desktop
   "747648890" # Telegram
   "402592703" # Timeout
-  "497799835" # XCode
   "836505650" # Battery Monitor
   "931134707" # Wire
   "568494494" # Pocket
   "732710998" # Enpass
+  "497799835" # XCode
 )
 for mac_app_store_app in "${mac_app_store_apps[@]}"; do
   mas install "$mac_app_store_app"
@@ -137,31 +134,29 @@ done
 
 
 # ==================================================================
-# DOTFILES
+# REPOS
 # ==================================================================
 
 echo "Cloning scripts"
 cd ~/repos
 git clone https://github.com/fhavrlent/scripts.git
 
-cd ~
+echo "Cloning dotfiles"
+git clone https://github.com/fhavrlent/dotfiles.git
+
 
 # ==================================================================
 # DOTFILES
 # ==================================================================
 
-echo "Cloning dotfiles"
-cd ~/repos
-git clone https://github.com/fhavrlent/dotfiles.git
 cd dotfiles
 
-
 echo "VS Code dotfiles"
-rm ~/Library/Application\ Support/Code/User/settings.json
+rm --force ~/Library/Application\ Support/Code/User/settings.json
 ln ./vscode.json ~/Library/Application\ Support/Code/User/settings.json
 
 echo "zsh dotfiles"
-rm ~/.zshrc
+rm --force ~/.zshrc
 ln .zshrc ~/.zshrc
 source ~/.zshrc
 
@@ -184,21 +179,12 @@ echo "Configuring screenshots to save in Downloads"
 defaults write com.apple.screencapture location ~/Downloads
 killall SystemUIServer
 
-# Dock
-
-echo "Hide closed apps from dock"
-defaults write com.apple.dock static-only -bool TRUE
-killall Dock
 
 # DS_STORE
 
 echo "Turning off .DS_Store on network drives"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 
-# CHROME
-
-echo "Configuring incognito mode"
-defaults write com.google.chrome IncognitoModeAvailability -integer 1
 
 
 # ==================================================================
@@ -206,6 +192,8 @@ defaults write com.google.chrome IncognitoModeAvailability -integer 1
 # ==================================================================
 
 cat << EOF
+- nvm install node
+- nvm use node
 - Disable the Guest user under User & Groups
 - Change hostname
 - Turn on FileVault
@@ -232,10 +220,11 @@ cat << EOF
 - Setup Arq Backup to B2
   - Thin backups
 
+
 EOF
 
 # ==================================================================
-# zsh
+# oh-my-zsh
 # ==================================================================
 
 echo "Setting up oh-my-zsh"
