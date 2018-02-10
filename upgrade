@@ -1,7 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 
-
 # ==================================================================
 # PACKAGES
 # ==================================================================
@@ -11,6 +10,9 @@ set -euo pipefail
 echo "Upgrading Homebrew packages"
 brew update
 brew upgrade
+brew cask upgrade
+
+# NPM
 
 echo "Upgrading npm"
 npm install npm@latest -g
@@ -21,7 +23,6 @@ npm install npm@latest -g
 
 echo "Upgrading Mac App Store apps"
 mas upgrade
-
 
 # ==================================================================
 # MACOS
