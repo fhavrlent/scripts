@@ -36,13 +36,9 @@ npm install npm@latest -g
 echo "Installing npm packages"
 
 npm_packages=(
-  "create-react-native-app"
   "eslint"
   "eslint-plugin-prettier"
-  "react-devtools"
-  "react-native-cli"
   "create-react-app"
-  "watchman"
 )
 
 for npm_package in "${npm_packages[@]}"; do
@@ -137,8 +133,9 @@ done
 # REPOS
 # ==================================================================
 
-echo "Cloning scripts"
 cd ~/repos
+
+echo "Cloning scripts"
 git clone https://github.com/fhavrlent/scripts.git
 
 echo "Cloning dotfiles"
@@ -152,11 +149,11 @@ git clone https://github.com/fhavrlent/dotfiles.git
 cd dotfiles
 
 echo "VS Code dotfiles"
-rm --force ~/Library/Application\ Support/Code/User/settings.json
+rm -f ~/Library/Application\ Support/Code/User/settings.json
 ln ./vscode.json ~/Library/Application\ Support/Code/User/settings.json
 
 echo "zsh dotfiles"
-rm --force ~/.zshrc
+rm -f ~/.zshrc
 ln .zshrc ~/.zshrc
 source ~/.zshrc
 
@@ -165,13 +162,6 @@ cd ~
 # ==================================================================
 # MACOS
 # ==================================================================
-
-# HIDDEN FILES
-
-echo "Configuring hidden files to show"
-defaults write com.apple.finder AppleShowAllFiles YES
-killall Finder
-
 
 # SCREENSHOTS
 
