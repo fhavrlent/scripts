@@ -69,7 +69,6 @@ homebrew_cask_packages=(
   "postman"
   "filezilla"
   "whatsapp"
-  "rescuetime"
   "scroll-reverser"
   "gpg-suite"
   "font-meslo-for-powerline"
@@ -86,7 +85,6 @@ mac_app_store_apps=(
   "585829637" # Todoist
   "1055511498" # Day One
   "715768417" # MS Remote Desktop
-  "747648890" # Telegram
   "402592703" # Timeout
   "836505650" # Battery Monitor
   "931134707" # Wire
@@ -136,28 +134,23 @@ done
 cd ~/repos
 
 echo "Cloning scripts"
-git clone https://github.com/fhavrlent/scripts.git
+git clone git@github.com:fhavrlent/scripts.git
 
 echo "Cloning dotfiles"
-git clone https://github.com/fhavrlent/dotfiles.git
+git clone git@github.com:fhavrlent/dotfiles.git
 
 
 # ==================================================================
 # DOTFILES
 # ==================================================================
 
-cd dotfiles
+cd ~/repos/dotfiles
 
 echo "VS Code dotfiles"
 rm -f ~/Library/Application\ Support/Code/User/settings.json
 ln ./vscode.json ~/Library/Application\ Support/Code/User/settings.json
 
-echo "zsh dotfiles"
-rm -f ~/.zshrc
-ln .zshrc ~/.zshrc
-source ~/.zshrc
 
-cd ~
 
 # ==================================================================
 # MACOS
@@ -175,47 +168,15 @@ killall SystemUIServer
 echo "Turning off .DS_Store on network drives"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 
-
-
-# ==================================================================
-# MANUAL
-# ==================================================================
-
-cat << EOF
-- nvm install node
-- nvm use node
-- Disable the Guest user under User & Groups
-- Change hostname
-- Turn on FileVault
-- Sync iTerm 2 with com.googlecode.iterm2.plist dotfile
-- Text Message Forwarding (on, from iPhone)
-- Delete unused factory Applications
-- Users
-  - Add avatar
-  - Login items (`RescueTime, Arq Backup, Todoist`)
-- Desktop & Screen Saver
-  - Add desktop background
-- Finder
-  - Favorites (all)
-  - Show all filename extensions (on)
-  - Correct spelling automatically (off)
-  - Remove items from the Trash after 30 days (on)
-  - Keep folders on top when sorting by name (on)
-- Notification Center
-  - Do Not Disturb
-    - Scheduled (on, from 10pm-6am)
-    - When display is sleeping (on)
-    - When mirroring to TVs and projectors (on)
-    - Allow repeated calls (on)
-- Setup Arq Backup to B2
-  - Thin backups
-
-
-EOF
-
 # ==================================================================
 # oh-my-zsh
 # ==================================================================
 
 echo "Setting up oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+echo "zsh dotfiles"
+rm -f ~/.zshrc
+ln .zshrc ~/.zshrc
+source ~/.zshrc
+
+cd ~
