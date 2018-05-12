@@ -71,6 +71,7 @@ homebrew_cask_packages=(
   "whatsapp"
   "scroll-reverser"
   "gpg-suite"
+  "virtualbox"
   "font-meslo-for-powerline"
   "font-fira-code"
 )
@@ -120,7 +121,8 @@ vscode_extensions=("Compulim.vscode-clock"
 "kokororin.vscode-phpfmt"
 "naumovs.color-highlight"
 "robinbentley.sass-indented"
-"xabikos.JavaScriptSnippets")
+"xabikos.JavaScriptSnippets"
+"eamodio.gitlens")
 
 for vscode_extension in "${vscode_extensions[@]}"; do
   code --install-extension "$vscode_extension"
