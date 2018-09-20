@@ -7,7 +7,7 @@ set -euo pipefail
 
 echo Remove unused homebrew artifacts
 brew cleanup
-brew cask cleanup
+brew cleanup
 brew prune
 
 echo Remove .DS_Store files
