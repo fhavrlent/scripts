@@ -63,7 +63,6 @@ homebrew_cask_packages=(
   "slack"
   "skype"
   "visual-studio-code"
-  "macpass"
   "tunnelblick"
   "sequel-pro"
   "postman"
@@ -84,7 +83,6 @@ echo "Installing Mac App Store apps"
 
 mac_app_store_apps=(
   "585829637" # Todoist
-  "1055511498" # Day One
   "715768417" # MS Remote Desktop
   "402592703" # Timeout
   "836505650" # Battery Monitor
@@ -117,10 +115,7 @@ vscode_extensions=("Compulim.vscode-clock"
 "dzannotti.vscode-babel-coloring"
 "robertohuertasm.vscode-icons"
 "esbenp.prettier-vscode"
-"felixfbecker.php-intellisense"
-"kokororin.vscode-phpfmt"
 "naumovs.color-highlight"
-"robinbentley.sass-indented"
 "xabikos.JavaScriptSnippets"
 "eamodio.gitlens")
 
