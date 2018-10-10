@@ -26,6 +26,7 @@ homebrew_packages=(
   "zsh" 
   "zsh-completions"
 )
+
 for homebrew_package in "${homebrew_packages[@]}"; do
   brew install "$homebrew_package"
 done
@@ -36,8 +37,6 @@ npm install npm@latest -g
 echo "Installing npm packages"
 
 npm_packages=(
-  "eslint"
-  "eslint-plugin-prettier"
   "create-react-app"
 )
 
@@ -57,22 +56,26 @@ brew tap caskroom/fonts
 
 homebrew_cask_packages=(
   "arq"
-  "iterm2"
-  "google-chrome"
-  "firefox"
-  "slack"
-  "skype"
-  "visual-studio-code"
-  "tunnelblick"
-  "sequel-pro"
-  "postman"
+  "cold-turkey-blocker"
+  "docker"
   "filezilla"
-  "whatsapp"
-  "scroll-reverser"
-  "gpg-suite"
-  "virtualbox"
-  "font-meslo-for-powerline"
   "font-fira-code"
+  "font-meslo-for-powerline"
+  "google-chrome"
+  "gpg-suite"
+  "iterm2"
+  "postman"
+  "scroll-reverser"
+  "sequel-pro"
+  "slack"
+  "spotify"
+  "tunnelblick"
+  "virtualbox"
+  "visual-studio-code"
+  "vlc"
+  "whatsapp"
+  "notion"
+
 )
 
 for homebrew_cask_package in "${homebrew_cask_packages[@]}"; do
@@ -83,13 +86,11 @@ echo "Installing Mac App Store apps"
 
 mac_app_store_apps=(
   "585829637" # Todoist
-  "715768417" # MS Remote Desktop
   "402592703" # Timeout
   "836505650" # Battery Monitor
   "931134707" # Wire
   "568494494" # Pocket
   "732710998" # Enpass
-  "497799835" # XCode
 )
 for mac_app_store_app in "${mac_app_store_apps[@]}"; do
   mas install "$mac_app_store_app"
