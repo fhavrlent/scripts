@@ -7,15 +7,16 @@ set -euo pipefail
 
 # HOMEBREW
 
-echo "Upgrading Homebrew packages"
+echo "Upgrading global Homebrew packages"
 brew update
 brew upgrade
-brew cask upgrade
 
-# NPM
+echo "Upgrading Node"
+nvm install --lts
+nvm use --lts
 
 echo "Upgrading npm"
-npm install npm@latest -g
+npm install -g npm
 
 # ==================================================================
 # MAC APP STORE
@@ -30,4 +31,3 @@ mas upgrade
 
 echo "Upgrading macOS"
 sudo softwareupdate -ia
-
