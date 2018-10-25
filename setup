@@ -15,7 +15,16 @@ mkdir -p repos
 echo "Installing Homebrew"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-echo "Installing Homebrew packages"
+echo "Adding Homebrew taps"
+homebrew_taps=(
+	"caskroom/cask"
+  "caskroom/fonts"
+)
+for homebrew_tap in "${homebrew_taps[@]}"; do
+	brew tap "$homebrew_tap"
+done
+
+echo "Installing global Homebrew packages"
 
 homebrew_packages=(
   "git"
@@ -31,8 +40,13 @@ for homebrew_package in "${homebrew_packages[@]}"; do
   brew install "$homebrew_package"
 done
 
+echo "Installing Node"
+. ~/.nvm/nvm.sh
+nvm install --lts
+nvm use --lts
+
 echo "Upgrading npm"
-npm install npm@latest -g
+npm install -g npm
 
 echo "Installing npm packages"
 
@@ -51,14 +65,10 @@ done
 
 echo "Installing Homebrew cask apps and fonts"
 
-brew tap caskroom/cask
-brew tap caskroom/fonts
-
 homebrew_cask_packages=(
   "arq"
   "cold-turkey-blocker"
   "docker"
-  "filezilla"
   "font-fira-code"
   "font-meslo-for-powerline"
   "google-chrome"
@@ -66,10 +76,8 @@ homebrew_cask_packages=(
   "iterm2"
   "postman"
   "scroll-reverser"
-  "sequel-pro"
   "slack"
   "spotify"
-  "tunnelblick"
   "virtualbox"
   "visual-studio-code"
   "vlc"
@@ -86,7 +94,6 @@ echo "Installing Mac App Store apps"
 
 mac_app_store_apps=(
   "585829637" # Todoist
-  "402592703" # Timeout
   "836505650" # Battery Monitor
   "931134707" # Wire
   "568494494" # Pocket
@@ -108,17 +115,19 @@ export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/b
 EOF
 
 vscode_extensions=("Compulim.vscode-clock"
-"EditorConfig.EditorConfig"
-"burkeholland.simple-react-snippets"
+"amatiasq.sort-imports"
 "capaj.vscode-exports-autocomplete"
 "christian-kohler.path-intellisense"
 "dbaeumer.vscode-eslint"
-"dzannotti.vscode-babel-coloring"
-"robertohuertasm.vscode-icons"
+"eamodio.gitlens"
+"EditorConfig.EditorConfig"
+"eg2.tslint"
 "esbenp.prettier-vscode"
+"kumar-harsh.graphql-for-vscode"
+"ms-vsliveshare.vsliveshare"
 "naumovs.color-highlight"
-"xabikos.JavaScriptSnippets"
-"eamodio.gitlens")
+"octref.vetur"
+"robertohuertasm.vscode-icons")
 
 for vscode_extension in "${vscode_extensions[@]}"; do
   code --install-extension "$vscode_extension"
