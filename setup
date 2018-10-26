@@ -30,7 +30,6 @@ homebrew_packages=(
   "git"
   "mas"
   "yarn"
-  "nvm"
   "tig"
   "zsh" 
   "zsh-completions"
@@ -39,6 +38,9 @@ homebrew_packages=(
 for homebrew_package in "${homebrew_packages[@]}"; do
   brew install "$homebrew_package"
 done
+
+echo "Installing Node version manager"
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 
 echo "Installing Node"
 . ~/.nvm/nvm.sh
