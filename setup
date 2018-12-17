@@ -59,6 +59,7 @@ done
 echo "Installing global Homebrew packages"
 
 homebrew_packages=(
+	"rclone"
   "git"
   "mas"
   "yarn"
