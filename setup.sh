@@ -1,6 +1,30 @@
 #!/bin/bash
 set -euo pipefail
 
+echo "
+░░░░░░░░░▄░░░░░░░░░░░░░░▄
+░░░░░░░░▌▒█░░░░░░░░░░░▄▀▒▌
+░░░░░░░░▌▒▒█░░░░░░░░▄▀▒▒▒▐
+░░░░░░░▐▄▀▒▒▀▀▀▀▄▄▄▀▒▒▒▒▒▐
+░░░░░▄▄▀▒░▒▒▒▒▒▒▒▒▒█▒▒▄█▒▐
+░░░▄▀▒▒▒░░░▒▒▒░░░▒▒▒▀██▀▒▌
+░░▐▒▒▒▄▄▒▒▒▒░░░▒▒▒▒▒▒▒▀▄▒▒▌
+░░▌░░▌█▀▒▒▒▒▒▄▀█▄▒▒▒▒▒▒▒█▒▐
+░▐░░░▒▒▒▒▒▒▒▒▌██▀▒▒░░░▒▒▒▀▄▌
+░▌░▒▄██▄▒▒▒▒▒▒▒▒▒░░░░░░▒▒▒▒▌
+▌▒▀▐▄█▄█▌▄░▀▒▒░░░░░░░░░░▒▒▒▐
+▐▒▒▐▀▐▀▒░▄▄▒▄▒▒▒▒▒▒░▒░▒░▒▒▒▒▌
+▐▒▒▒▀▀▄▄▒▒▒▄▒▒▒▒▒▒▒▒░▒░▒░▒▒▐
+░▌▒▒▒▒▒▒▀▀▀▒▒▒▒▒▒░▒░▒░▒░▒▒▒▌
+░▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▒▄▒▒▐
+░░▀▄▒▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▄▒▒▒▒▌
+░░░░▀▄▒▒▒▒▒▒▒▒▒▒▄▄▄▀▒▒▒▒▄▀
+░░░░░░▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀
+░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▀▀
+
+You are blessed by Mac Doge
+"
+
 # ==================================================================
 # ROOT
 # ==================================================================
@@ -41,7 +65,12 @@ fi
 # ==================================================================
 
 echo "Installing Homebrew"
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if test ! $(which brew)
+then
+	## Don't prompt for confirmation when installing homebrew
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
+fi
+
 brew upgrade
 brew update
 
@@ -62,64 +91,54 @@ homebrew_packages=(
 	"rclone"
   "git"
   "mas"
-  "yarn"
   "tig"
-  "zsh" 
+  "yarn"
   "zsh-completions"
+  "zsh" 
 )
 
 for homebrew_package in "${homebrew_packages[@]}"; do
   brew install "$homebrew_package"
 done
 
-echo "Installing Node version manager"
+echo "Installing NVM"
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 
 echo "Installing Node"
 . ~/.nvm/nvm.sh
-nvm install --lts
+. ~/.profile
+. ~/.bashrc 
+nvm install --lts 
 nvm use --lts
 
 echo "Upgrading npm"
 npm install -g npm
 
-echo "Installing npm packages"
-
-npm_packages=(
-  "create-react-app"
-)
-
-for npm_package in "${npm_packages[@]}"; do
-  npm install -g "$npm_package"
-done
-
-
 # ==================================================================
 # APPS 
 # ==================================================================
 
-echo "Installing Homebrew cask apps and fonts"
+echo "Installing Homebrew cask apps and fonts 🤔"
 
 homebrew_cask_packages=(
-  "arq"
-  "cold-turkey-blocker"
   "docker"
+  "firefox"
   "font-fira-code"
   "font-meslo-for-powerline"
   "google-chrome"
   "gpg-suite"
   "iterm2"
+  "microsoft-teams"
+  "notion"
   "postman"
   "scroll-reverser"
-  "slack"
   "spotify"
+  "timing"
   "virtualbox"
   "visual-studio-code"
   "vlc"
   "whatsapp"
-  "notion"
-  "microsoft-teams"
-  
+  "caffeine"
 )
 
 for homebrew_cask_package in "${homebrew_cask_packages[@]}"; do
@@ -153,12 +172,11 @@ export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/b
 EOF
 
 vscode_extensions=("Compulim.vscode-clock"
-"amatiasq.sort-imports"
 "capaj.vscode-exports-autocomplete"
 "christian-kohler.path-intellisense"
 "dbaeumer.vscode-eslint"
 "eamodio.gitlens"
-"EditorConfig.EditorConfig"
+"EditorConfig.EditorConfig" 
 "eg2.tslint"
 "esbenp.prettier-vscode"
 "kumar-harsh.graphql-for-vscode"
@@ -179,10 +197,10 @@ done
 cd ~/repos
 
 echo "Cloning scripts"
-git clone git@github.com:fhavrlent/scripts.git
+git clone https://github.com/fhavrlent/scripts.git
 
 echo "Cloning dotfiles"
-git clone git@github.com:fhavrlent/dotfiles.git
+git clone https://github.com/fhavrlent/dotfiles.git
 
 
 # ==================================================================
@@ -196,40 +214,51 @@ rm -f ~/Library/Application\ Support/Code/User/settings.json
 ln ./vscode.json ~/Library/Application\ Support/Code/User/settings.json
 
 
-
 # ==================================================================
 # MACOS
 # ==================================================================
 
-# SCREENSHOTS
+osascript -e 'tell application "System Preferences" to quit'
+
+echo "Save to disk (not to iCloud) by default"
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+echo "Disable the “Are you sure you want to open this application?” dialog"
+defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 echo "Configuring screenshots to save in Downloads"
 defaults write com.apple.screencapture location ~/Downloads
-killall SystemUIServer
 
+echo "Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)"
+defaults write com.apple.screencapture type -string "png"
 
-# DS_STORE
+echo "Avoid creating .DS_Store files on network or USB volumes"
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
-echo "Turning off .DS_Store on network drives"
-defaults write com.apple.desktopservices DSDontWriteNetworkStores true
-
-# Minimize windows into their application’s icon
+echo "Minimize windows into their application’s icon"
 defaults write com.apple.dock minimize-to-application -bool true
 
-# Disable auto-correct
+echo "Disable auto-correct"
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
-# Require password immediately after sleep or screen saver begins"
+echo "Require password immediately after sleep or screen saver begins"
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
-# Enable the automatic update check
+echo "Stop iTunes from responding to the keyboard media keys"
+launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
+
+echo "Don’t show recent applications in Dock"
+defaults write com.apple.dock show-recents -bool false
+
+echo "Enable the automatic update check"
 defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 
-# Download newly available updates in background
+echo "Download newly available updates in background"
 defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
 
-# Install System data files & security updates
+echo "Install System data files & security updates"
 defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
 
 # ==================================================================
@@ -241,6 +270,6 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 echo "zsh dotfiles"
 rm -f ~/.zshrc
 ln .zshrc ~/.zshrc
-source ~/.zshrc
+. ~/.zshrc
 
 cd ~
