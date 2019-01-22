@@ -106,7 +106,6 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | b
 
 echo "Installing Node"
 . ~/.nvm/nvm.sh
-. ~/.bashrc 
 nvm install --lts 
 nvm use --lts
 
