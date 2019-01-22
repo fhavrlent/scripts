@@ -102,7 +102,7 @@ for homebrew_package in "${homebrew_packages[@]}"; do
 done
 
 echo "Installing NVM"
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
 echo "Installing Node"
 . ~/.nvm/nvm.sh
