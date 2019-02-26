@@ -7,8 +7,6 @@ set -euo pipefail
 
 echo Remove unused homebrew artifacts
 brew cleanup
-brew cleanup
-brew prune
 
 echo Remove .DS_Store files
 find "$HOME" -name '.DS_Store' -delete
