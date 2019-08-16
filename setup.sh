@@ -22,7 +22,7 @@ echo "
 ░░░░░░▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀
 ░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▀▀
 
-You are blessed by Mac Doge
+You are blessed by Mac Doge!
 "
 
 # ==================================================================
@@ -88,13 +88,14 @@ done
 echo "Installing global Homebrew packages"
 
 homebrew_packages=(
-	"rclone"
   "git"
   "mas"
+  "rclone"
+  "thefuck"
   "tig"
   "yarn"
   "zsh-completions"
-  "zsh" 
+  "zsh"
 )
 
 for homebrew_package in "${homebrew_packages[@]}"; do
@@ -119,14 +120,18 @@ npm install -g npm
 echo "Installing Homebrew cask apps and fonts 🤔"
 
 homebrew_cask_packages=(
+  "1password"
+  "alfred"
+  "calibre"
   "docker"
+  "evernote"
   "firefox"
   "font-fira-code"
   "font-meslo-for-powerline"
   "google-chrome"
   "gpg-suite"
   "iterm2"
-  "microsoft-teams"
+  "karabiner-elements"
   "notion"
   "postman"
   "scroll-reverser"
@@ -136,7 +141,6 @@ homebrew_cask_packages=(
   "visual-studio-code"
   "vlc"
   "whatsapp"
-  "caffeine"
 )
 
 for homebrew_cask_package in "${homebrew_cask_packages[@]}"; do
@@ -148,12 +152,12 @@ brew cleanup
 echo "Installing Mac App Store apps"
 
 mac_app_store_apps=(
-  "585829637" # Todoist
-  "836505650" # Battery Monitor
-  "931134707" # Wire
   "568494494" # Pocket
-  "732710998" # Enpass
+  "585829637" # Todoist
+  "425424353" # The Unarchiver
+  "405399194" # Kindle (1.26.1)
 )
+
 for mac_app_store_app in "${mac_app_store_apps[@]}"; do
   mas install "$mac_app_store_app"
 done
@@ -169,19 +173,24 @@ cat << EOF >> ~/.bash_profile
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 EOF
 
-vscode_extensions=("Compulim.vscode-clock"
-"capaj.vscode-exports-autocomplete"
-"christian-kohler.path-intellisense"
-"dbaeumer.vscode-eslint"
-"eamodio.gitlens"
-"EditorConfig.EditorConfig" 
-"eg2.tslint"
-"esbenp.prettier-vscode"
-"kumar-harsh.graphql-for-vscode"
-"ms-vsliveshare.vsliveshare"
-"naumovs.color-highlight"
-"octref.vetur"
-"robertohuertasm.vscode-icons")
+vscode_extensions=(
+  "capaj.vscode-exports-autocomplete"
+  "christian-kohler.path-intellisense"
+  "Compulim.vscode-clock"
+  "dbaeumer.vscode-eslint"
+  "eamodio.gitlens"
+  "EditorConfig.EditorConfig"
+  "esbenp.prettier-vscode"
+  "Gruntfuggly.todo-tree"
+  "ms-azuretools.vscode-docker"
+  "ms-vsliveshare.vsliveshare"
+  "naumovs.color-highlight"
+  "octref.vetur"
+  "streetsidesoftware.code-spell-checker"
+  "vscode-icons-team.vscode-icons"
+  "waderyan.gitblame"
+  "wix.vscode-import-cost"
+)
 
 for vscode_extension in "${vscode_extensions[@]}"; do
   code --install-extension "$vscode_extension"
