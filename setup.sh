@@ -33,34 +33,6 @@ cd ~
 mkdir -p repos
 
 # ==================================================================
-# SSH KEY
-# ==================================================================
-
-echo "Generating ssh keys, adding to ssh-agent..."
-read -p 'Input email for ssh key: ' useremail
-
-echo "Use default ssh file location, enter a passphrase: "
-ssh-keygen -t rsa -b 4096 -C "$useremail"  # will prompt for password
-eval "$(ssh-agent -s)"
-
-# Now that sshconfig is synced add key to ssh-agent and
-# store passphrase in keychain
-ssh-add -K ~/.ssh/id_rsa
-
-if [ -e ~/.ssh/config ]
-then
-    echo "ssh config already exists. Skipping adding osx specific settings... "
-else
-	echo "Writing osx specific settings to ssh config... "
-   cat <<EOT >> ~/.ssh/config
-	Host *
-		AddKeysToAgent yes
-		UseKeychain yes
-		IdentityFile ~/.ssh/id_rsa
-EOT
-fi
-
-# ==================================================================
 # PACKAGES
 # ==================================================================
 
@@ -122,7 +94,6 @@ echo "Installing Homebrew cask apps and fonts 🤔"
 homebrew_cask_packages=(
   "1password"
   "alfred"
-  "calibre"
   "docker"
   "evernote"
   "firefox"
@@ -132,15 +103,11 @@ homebrew_cask_packages=(
   "gpg-suite"
   "iterm2"
   "karabiner-elements"
-  "notion"
-  "postman"
   "scroll-reverser"
+  "sourcetree"
   "spotify"
-  "timing"
-  "virtualbox"
   "visual-studio-code"
   "vlc"
-  "whatsapp"
 )
 
 for homebrew_cask_package in "${homebrew_cask_packages[@]}"; do
@@ -152,10 +119,7 @@ brew cleanup
 echo "Installing Mac App Store apps"
 
 mac_app_store_apps=(
-  "568494494" # Pocket
   "585829637" # Todoist
-  "425424353" # The Unarchiver
-  "405399194" # Kindle (1.26.1)
 )
 
 for mac_app_store_app in "${mac_app_store_apps[@]}"; do
@@ -174,6 +138,7 @@ export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/b
 EOF
 
 vscode_extensions=(
+  "atlassian.atlascode"
   "capaj.vscode-exports-autocomplete"
   "christian-kohler.path-intellisense"
   "Compulim.vscode-clock"
@@ -182,10 +147,10 @@ vscode_extensions=(
   "EditorConfig.EditorConfig"
   "esbenp.prettier-vscode"
   "Gruntfuggly.todo-tree"
-  "ms-azuretools.vscode-docker"
   "ms-vsliveshare.vsliveshare"
   "naumovs.color-highlight"
-  "octref.vetur"
+  "netcorext.uuid-generator"
+  "redhat.vscode-yaml"
   "streetsidesoftware.code-spell-checker"
   "vscode-icons-team.vscode-icons"
   "waderyan.gitblame"
@@ -219,6 +184,10 @@ cd ~/repos/dotfiles
 echo "VS Code dotfiles"
 rm -f ~/Library/Application\ Support/Code/User/settings.json
 ln ./vscode.json ~/Library/Application\ Support/Code/User/settings.json
+
+echo "ZSH dotfiles"
+rm -f ~/.zshrc
+ln ./.zshrc ~/.zshrc
 
 
 # ==================================================================
