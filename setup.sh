@@ -249,3 +249,5 @@ ln .zshrc ~/.zshrc
 . ~/.zshrc
 
 cd ~
+
+echo "Install Cryptomator - https://cryptomator.org/"
