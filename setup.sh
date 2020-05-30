@@ -62,7 +62,6 @@ echo "Installing global Homebrew packages"
 homebrew_packages=(
   "git"
   "mas"
-  "rclone"
   "thefuck"
   "tig"
   "yarn"
@@ -75,7 +74,7 @@ for homebrew_package in "${homebrew_packages[@]}"; do
 done
 
 echo "Installing NVM"
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh | bash
 
 echo "Installing Node"
 . ~/.nvm/nvm.sh
@@ -94,20 +93,20 @@ echo "Installing Homebrew cask apps and fonts 🤔"
 homebrew_cask_packages=(
   "1password"
   "alfred"
-  "docker"
+  "cyberduck"
   "evernote"
   "firefox"
   "font-fira-code"
   "font-meslo-for-powerline"
-  "google-chrome"
   "gpg-suite"
   "iterm2"
   "karabiner-elements"
   "scroll-reverser"
-  "sourcetree"
+  "setapp"
   "spotify"
   "visual-studio-code"
   "vlc"
+  "whatsapp"
 )
 
 for homebrew_cask_package in "${homebrew_cask_packages[@]}"; do
@@ -138,7 +137,7 @@ export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/b
 EOF
 
 vscode_extensions=(
-  "atlassian.atlascode"
+  "azemoh.one-monokai"
   "capaj.vscode-exports-autocomplete"
   "christian-kohler.path-intellisense"
   "Compulim.vscode-clock"
@@ -251,3 +250,4 @@ ln .zshrc ~/.zshrc
 cd ~
 
 echo "Install Cryptomator - https://cryptomator.org/"
+echo "Install all favorites from Setapp"
