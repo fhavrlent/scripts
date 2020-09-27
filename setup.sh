@@ -91,19 +91,26 @@ npm install -g npm
 echo "Installing Homebrew cask apps and fonts 🤔"
 
 homebrew_cask_packages=(
-  "1password"
+  "adguard"
   "alfred"
-  "cyberduck"
+  "appcleaner"
+  "calibre"
+  "chromium"
   "evernote"
-  "firefox"
   "font-fira-code"
-  "font-meslo-for-powerline"
   "gpg-suite"
   "iterm2"
   "karabiner-elements"
+  "keybase"
+  "notion"
+  "openemu"
   "scroll-reverser"
-  "setapp"
+  "vlc"
+  "slack"
+  "sourcetree"
   "spotify"
+  "steam"
+  "tunnelblick"
   "visual-studio-code"
   "vlc"
   "whatsapp"
@@ -118,7 +125,14 @@ brew cleanup
 echo "Installing Mac App Store apps"
 
 mac_app_store_apps=(
-  "585829637" # Todoist
+  "1511185140" # MoneyWiz
+  "1482490089" # Tampermonkey
+  "1477385213" # Save to Pocket
+  "1481669779" # Evernote Web Clipper
+  "1055511498" # Day One
+  "568494494" # Pocket
+  "1449412482" # Reeder
+  "732710998" # Enpass
 )
 
 for mac_app_store_app in "${mac_app_store_apps[@]}"; do
