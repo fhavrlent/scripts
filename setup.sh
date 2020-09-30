@@ -136,7 +136,7 @@ mac_app_store_apps=(
   "1481669779" # Evernote Web Clipper
   "1055511498" # Day One
   "568494494" # Pocket
-  "1449412482" # Reeder
+  "1449412482" # Reeder 4
   "732710998" # Enpass
 )
 

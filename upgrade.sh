@@ -12,7 +12,7 @@ set -euo pipefail
 echo "Upgrading global Homebrew packages"
 brew update
 brew upgrade
-brew cask upgrade
+brew upgrade --cask
 
 echo "Upgrading Node"
 nvm install --lts
